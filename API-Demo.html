@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ <title>Export to PDF</title>
+    
+    <script type="text/javascript" 
+        src="http://localhost/javascripts/api/tableau-2.min.js"></script>
+    <script type="text/javascript">
+        var viz;
+
+        function initViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+                url = "http://localhost/#/site/Demo/views/Superstore/Overview",
+                options = {
+                    hideTabs: true,
+                    hideToolbar: true,
+                    height: '600px',
+                    width: '840px'
+                };
+
+            viz = new tableau.Viz(containerDiv, url, options); 
+            // Create a viz object and embed it in the container div.
+        }
+
+        function exportToPDF() {
+            viz.showExportPDFDialog();
+        }
+    </script>    
+    
+<style type="text/css">
+
+body{
+margin:50,0, 0;
+padding:0;
+line-height: 1.5em;
+}
+
+b{font-size: 110%;}
+em{color: red;}
+
+#maincontainer{
+width: 1040px; /*Width of main container*/
+margin: 0 auto; /*Center container on page*/
+}
+
+#topsection{
+background: #EAEAEA;
+height: 90px; /*Height of top section*/
+text-align: center;
+}
+
+#topsection h1{
+margin: 0;
+padding-top: 25px;
+}
+
+#contentwrapper{
+float: left;
+width: 100%;
+}
+
+#contentcolumn{
+margin-left: 200px; /*Set left margin to LeftColumnWidth*/
+}
+
+#leftcolumn{
+float: left;
+width: 200px; /*Width of left column*/
+margin-left: -1040px; /*Set left margin to -(MainContainerWidth)*/
+padding-top: 20px;
+/* background: #C8FC98; */
+}
+
+#footer{
+clear: left;
+width: 100%;
+background: white;
+color: #000;
+text-align: right;
+padding: 4px 0;
+}
+
+#footer a{
+color: darkgray;
+padding-right: 10px;
+}
+
+.innertube{
+margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+margin-top: 0;
+}
+
+/* ####### responsive layout CSS ####### */
+
+@media (max-width: 840px){ /* responsive layout break point */
+	#maincontainer{
+	width: 100%;
+	}
+	
+	#contentwrapper{
+	float: none;
+	}
+	
+	#leftcolumn{
+	float: none;
+	width: 100%;
+	margin-left: 0;
+	}
+	
+	#contentcolumn{
+	margin-left: 0;
+	}
+}
+
+</style>
+
+</head>
+
+    
+<body onload="initViz();">
+<div id="maincontainer">
+
+<div id="topsection"><div class="innertube"><h1>Sample Export to PDF using Javascript API</h1></div></div>
+
+<div id="contentwrapper">
+<div id="contentcolumn">
+<div class="innertube">
+    <div id="vizContainer" ></div>
+    
+    </div>
+</div>
+</div>
+
+<div id="leftcolumn">
+<div class="innertube"><b>Instructions</b> <br> Press the button below to export this dashboard as a pdf document. <br><br> <button onclick="exportToPDF();">Export</button></div>
+</div>
+
+<div id="footer"><a href="https://onlinehelp.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api.htm">Tableau Javascript API Guide</a></div>
+
+</div>
+
+</body>
+</html>
